@@ -1,9 +1,9 @@
 import { isRegistered, currentUser } from "../actions";
 import { localStorageService } from '../service/localStorage';
 
-function getUserIfAny() {
+function getUserIfAny() {    
     return dispatch => {
-        dispatch(isRegistered());
+        dispatch(isRegistered(true));
         setTimeout(()=>{
             let user = localStorageService.getUser();
             dispatch(currentUser(user))

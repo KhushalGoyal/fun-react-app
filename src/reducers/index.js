@@ -9,13 +9,13 @@ const user = (state = initial_state, action) => {
         case UserState.TOBE_REGISTERED: 
             return {
                 ...state,
-                pending : true
+                pending : action.pending
             }
         case UserState.CURRENT_USER: 
             return {
                 ...state,
                 pending : false,
-                userState : action.payload
+                userState : action.user
             }
         default:
             return state

@@ -4,9 +4,10 @@ export const UserState = {
     TOBE_REGISTERED : 'TOBE_REGISTERED'
 }
 
-export const isRegistered = function(){
+export const isRegistered = function(pending){
     return   {
         type : UserState.IS_REGISTERED,
+        pending : pending
     }
 }
 

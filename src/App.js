@@ -1,33 +1,29 @@
-import React, { Component } from 'react';
-import openSocket from 'socket.io-client';
-const  socket = openSocket('http://localhost:8000');
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
-import { UserState } from './actions';
-import user, {} from "./reducers";
-
+// import { UserState } from './actions';
 import RegistrationPopUp from './components/registration-pop-up/registration-pop-up';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux'
 import getUserIfAny from './containers/User';
 
+
 class App extends Component {
-  constructor(props){
-    super(props);
-  } 
+  componentDidMount(){
+    this.props.fetchUser();
+  }
   render() {
-    if(UserState.IS_REGISTERED){
-      return (
-        <h1>Hi</h1>
-      )
-    }else{
-      <RegistrationPopUp></RegistrationPopUp>
-    }
+    return (    
+      <div>  
+        <RegistrationPopUp user={this.props.user}/>
+      </div>
+    )
   }
 }
 
 const mapStateToProps = state => ({
-  user: user(state),
-  pending: user(state)
+  user: state.userState,
+  pending: state.pending
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
