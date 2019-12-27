@@ -1,12 +1,15 @@
+import { http } from "../service/addUserToMaster";
 export const localStorageService = {
     getUser :  function(){
         if(localStorage.getItem('firstname') && localStorage.getItem('lastname')){
-            return {
+            let userDetails = {
                 firstname : localStorage.getItem('firstname'),
                 lastname : localStorage.getItem('lastname'),
                 email : localStorage.getItem('email'),
                 uniqueID : localStorage.getItem('uniqueID')
-            };
+            }
+            http.addUsertoSocket(userDetails);
+            return userDetails;
         }else{
             return null;
         }
@@ -17,5 +20,13 @@ export const localStorageService = {
         localStorage.setItem('lastname',userObj.lastname);
         localStorage.setItem('email',userObj.email);
         localStorage.setItem('uniqueID',uniqueToken);
+        let userDetails = {
+            firstname : localStorage.getItem('firstname'),
+            lastname : localStorage.getItem('lastname'),
+            email : localStorage.getItem('email'),
+            uniqueID : localStorage.getItem('uniqueID')
+        }
+        http.addUsertoSocket(userDetails);
+        return userDetails;
     }
 }

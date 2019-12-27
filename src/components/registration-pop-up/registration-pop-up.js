@@ -2,9 +2,10 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from "react-bootstrap/Modal";
 import Form from 'react-bootstrap/Form';
-import { localStorageService } from '../../service/localStorage'
-// import FormGroup from 'react-bootstrap/FormGroup';
-// import FormControl from 'react-bootstrap/FormControl';
+import { localStorageService } from '../../service/localStorage';
+import userContainer from '../../containers/User'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 class RegistrationPopUp extends React.Component {
     constructor(props) {
@@ -69,7 +70,8 @@ class RegistrationPopUp extends React.Component {
 
     handleCloseClick() {
         if(this.state.firstname  !== "" && this.state.lastname !== "" && this.state.email !== ""){
-            localStorageService.addUser(this.state);
+            let userDetails = localStorageService.addUser(this.state);
+            this.props.updateUserState(userDetails);
             this.setState((state) => {
                 return {
                     show: false,
@@ -82,5 +84,11 @@ class RegistrationPopUp extends React.Component {
     }
 }
 
+const mapDispatchToProps = dispatch => bindActionCreators({
+    updateUserState: userContainer.updateUserState
+}, dispatch)
 
-export default RegistrationPopUp;
+export default connect(
+    null,
+    mapDispatchToProps
+)(RegistrationPopUp);

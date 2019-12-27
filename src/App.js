@@ -2,11 +2,10 @@ import './App.css';
 import RegistrationPopUp from './components/registration-pop-up/registration-pop-up';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux'
-import getUserIfAny from './containers/User';
+import { bindActionCreators } from 'redux';
+import userContainer from './containers/User';
 import UserList from './components/user-list/user-list';
 import GameZone from './components/game-zone/game-zone';
-
 
 class App extends Component {
   componentDidMount(){
@@ -35,7 +34,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators({
-  fetchUser: getUserIfAny
+  fetchUser: userContainer.getUserIfAny
 }, dispatch)
 
 export default connect(

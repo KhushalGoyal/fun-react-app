@@ -11,4 +11,16 @@ function getUserIfAny() {
     }
 }
 
-export default getUserIfAny;
+function updateUserState(user){
+    debugger
+    return dispatch => {
+        dispatch(currentUser(user))
+    }
+}
+
+const userContainer = {
+    getUserIfAny : getUserIfAny, 
+    updateUserState : updateUserState
+}
+
+export default userContainer;
